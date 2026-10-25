@@ -1,0 +1,443 @@
+{
+  "active_patient_id": "GK-8821",
+  "patients": {
+    "GK-8821": {
+      "id": "GK-8821",
+      "mrn": "RK-48810",
+      "name": "Ravi Kumar",
+      "age": 54,
+      "dob": "12-May-1968",
+      "gender": "Male",
+      "portal_status": "Active",
+      "ehr_sync": "RMC Epic EHR (Real-time)",
+      "next_review": "Nov 14, 2024",
+      "allergies": [
+        {
+          "allergen": "Penicillin",
+          "severity": "Critical",
+          "reaction": "Severe anaphylaxis",
+          "year": "2015"
+        },
+        {
+          "allergen": "Sulfonamides (\"Sulfa\")",
+          "severity": "Critical",
+          "reaction": "Severe Maculopapular Rash / Hives",
+          "year": "2018"
+        },
+        {
+          "allergen": "Codeine Phosphate",
+          "severity": "Moderate",
+          "reaction": "Nausea & Emesis (Documented Adverse Effect)",
+          "year": "2019"
+        }
+      ],
+      "diagnoses": [
+        {
+          "condition": "Atrial Fibrillation (Chronic)",
+          "icd10": "I48.20",
+          "status": "Active"
+        },
+        {
+          "condition": "Hypertension (Stage 1)",
+          "icd10": "I10",
+          "status": "Active"
+        },
+        {
+          "condition": "Osteoarthritis (Mild)",
+          "icd10": "M19.90",
+          "status": "Active"
+        }
+      ],
+      "biometrics": {
+        "egfr": 78,
+        "egfr_unit": "mL/min/1.73m\u00b2",
+        "egfr_stage": "Stage 2 (Mild decrease)",
+        "blood_pressure": "132/84",
+        "bp_status": "7-day mean",
+        "serum_potassium": 4.2,
+        "potassium_unit": "mEq/L",
+        "potassium_status": "Within Target Range",
+        "last_inr": 2.3,
+        "inr_target": "2.0-3.0",
+        "inr_date": "Oct 12, 2024"
+      },
+      "medications": [
+        {
+          "id": "med-001",
+          "rx_number": "Rx #99318-A",
+          "name": "Warfarin Sodium",
+          "generic_name": "Warfarin Sodium",
+          "dosage": "5 mg once daily, evening",
+          "strength": "5 mg",
+          "route": "Oral Tablet",
+          "cadence": "Evening (18:00)",
+          "status": "active",
+          "prescriber": "Dr. Elena Vance (Cardiology)",
+          "start_date": "Jan 14, 2023",
+          "end_date": "Ongoing",
+          "refills": 3,
+          "indication": "Thromboembolism prophylaxis for Atrial Fibrillation",
+          "safety_target": "Requires monthly INR monitoring (Last INR: 2.3 on Oct 12)",
+          "safety_status": "Reconciled",
+          "atc_class": "B01AA03",
+          "category": "Oral Anticoagulant \u2022 Vitamin K Antagonist"
+        },
+        {
+          "id": "med-002",
+          "rx_number": "Rx #10482-C",
+          "name": "Metoprolol Tartrate",
+          "generic_name": "Metoprolol Tartrate",
+          "dosage": "25 mg twice daily with meals",
+          "strength": "25 mg",
+          "route": "Oral Tablet",
+          "cadence": "Twice daily with meals",
+          "status": "active",
+          "prescriber": "Dr. Elena Vance (Cardiology)",
+          "start_date": "Mar 02, 2023",
+          "end_date": "Ongoing",
+          "refills": 5,
+          "indication": "Rate control & Blood pressure regulation",
+          "safety_target": "Take consistently with food; check resting pulse periodically (Resting HR 68 bpm)",
+          "safety_status": "Stable",
+          "atc_class": "C07AB02",
+          "category": "Beta-Adrenergic Blocker \u2022 Selective \u03b21"
+        },
+        {
+          "id": "med-003",
+          "rx_number": "Self-Reported Entry",
+          "name": "Ibuprofen",
+          "generic_name": "Ibuprofen",
+          "dosage": "400 mg as needed for joint ache",
+          "strength": "400 mg",
+          "route": "Oral Capsule/Tablet",
+          "cadence": "PRN ~3-4 times/week",
+          "status": "attention",
+          "prescriber": "Over-the-counter self-report",
+          "start_date": "Oct 18, 2024",
+          "end_date": "Ongoing",
+          "refills": 0,
+          "indication": "Right knee osteoarthritis ache / tension headache",
+          "safety_target": "High Potential Interaction Warning: Potential bleeding risk with ongoing Warfarin anticoagulant therapy. Concomitant NSAID usage significantly heightens upper gastrointestinal hemorrhage risk.",
+          "safety_status": "Physician Flagged for Nov 14",
+          "atc_class": "M01AE01",
+          "category": "Non-Steroidal Anti-Inflammatory (NSAID)"
+        },
+        {
+          "id": "med-004",
+          "rx_number": "Archived Rx #87102-L",
+          "name": "Lisinopril",
+          "generic_name": "Lisinopril",
+          "dosage": "10 mg daily",
+          "strength": "10 mg",
+          "route": "Oral Tablet",
+          "cadence": "Once daily",
+          "status": "archived",
+          "prescriber": "Dr. Marcus Reed (Internal Med)",
+          "start_date": "Aug 2022",
+          "end_date": "Feb 2023",
+          "refills": 0,
+          "indication": "Hypertension course terminated",
+          "safety_target": "Discontinued due to persistent dry cough side-effect. Replaced with alternative antihypertensive therapy protocol under supervision.",
+          "safety_status": "Safe Transition Verified",
+          "atc_class": "C09AA03",
+          "category": "ACE Inhibitor \u2022 Course Terminated"
+        }
+      ]
+    },
+    "PS-4019": {
+      "id": "PS-4019",
+      "mrn": "PS-92014",
+      "name": "Priya Sharma",
+      "age": 44,
+      "dob": "18-Aug-1980",
+      "gender": "Female",
+      "portal_status": "Active",
+      "ehr_sync": "RMC Epic EHR (Real-time)",
+      "next_review": "Dec 02, 2024",
+      "allergies": [
+        {
+          "allergen": "Aspirin & NSAIDs",
+          "severity": "Critical",
+          "reaction": "Bronchospasm / Asthma Exacerbation (AERD)",
+          "year": "2019"
+        }
+      ],
+      "diagnoses": [
+        {
+          "condition": "Type 2 Diabetes Mellitus",
+          "icd10": "E11.9",
+          "status": "Active"
+        },
+        {
+          "condition": "Moderate Persistent Asthma",
+          "icd10": "J45.40",
+          "status": "Active"
+        }
+      ],
+      "biometrics": {
+        "egfr": 94,
+        "egfr_unit": "mL/min/1.73m\u00b2",
+        "egfr_stage": "Stage 1 (Normal renal filtration)",
+        "blood_pressure": "124/78",
+        "bp_status": "Normal Resting",
+        "serum_potassium": 4.1,
+        "potassium_unit": "mEq/L",
+        "potassium_status": "Target Range",
+        "last_inr": 1.0,
+        "inr_target": "N/A",
+        "inr_date": "Oct 15, 2024"
+      },
+      "medications": [
+        {
+          "id": "med-ps-01",
+          "rx_number": "Rx #66102-D",
+          "name": "Metformin Hydrochloride",
+          "generic_name": "Metformin Hydrochloride",
+          "dosage": "500 mg twice daily with meals",
+          "strength": "500 mg",
+          "route": "Oral Tablet",
+          "cadence": "Twice daily with meals",
+          "status": "active",
+          "prescriber": "Dr. Sunita Rao (Endocrinology)",
+          "start_date": "Jan 20, 2024",
+          "end_date": "Ongoing",
+          "refills": 4,
+          "indication": "Glycemic control in Type 2 Diabetes",
+          "safety_target": "Monitor periodic HbA1c and renal status. Avoid excessive alcohol consumption.",
+          "safety_status": "Reconciled",
+          "atc_class": "A10BA02",
+          "category": "Oral Biguanide Antihyperglycemic"
+        },
+        {
+          "id": "med-ps-02",
+          "rx_number": "Rx #78291-A",
+          "name": "Albuterol Sulfate Inhaler",
+          "generic_name": "Albuterol Inhaler",
+          "dosage": "90 mcg 2 puffs PRN shortness of breath",
+          "strength": "90 mcg",
+          "route": "Inhalation",
+          "cadence": "PRN every 4-6 hours",
+          "status": "active",
+          "prescriber": "Dr. Sunita Rao (Pulmonology)",
+          "start_date": "Feb 10, 2023",
+          "end_date": "Ongoing",
+          "refills": 6,
+          "indication": "Bronchospasm relief in persistent asthma",
+          "safety_target": "Contraindicated with non-cardioselective beta blockers.",
+          "safety_status": "Stable",
+          "atc_class": "R03AC02",
+          "category": "Short-Acting Beta-2 Adrenergic Agonist"
+        }
+      ]
+    },
+    "DC-7731": {
+      "id": "DC-7731",
+      "mrn": "DC-33901",
+      "name": "David Chen",
+      "age": 68,
+      "dob": "04-Nov-1956",
+      "gender": "Male",
+      "portal_status": "Active",
+      "ehr_sync": "RMC Epic EHR (Real-time)",
+      "next_review": "Nov 28, 2024",
+      "allergies": [
+        {
+          "allergen": "Iodinated Radiocontrast Media",
+          "severity": "Severe",
+          "reaction": "Acute Contrast-Induced Nephropathy / Urticaria",
+          "year": "2021"
+        }
+      ],
+      "diagnoses": [
+        {
+          "condition": "Chronic Kidney Disease (Stage 3b)",
+          "icd10": "N18.32",
+          "status": "Active"
+        },
+        {
+          "condition": "Chronic Hyperuricemia / Gout",
+          "icd10": "M10.9",
+          "status": "Active"
+        }
+      ],
+      "biometrics": {
+        "egfr": 38,
+        "egfr_unit": "mL/min/1.73m\u00b2",
+        "egfr_stage": "Stage 3b (Moderate-to-Severe decrease)",
+        "blood_pressure": "138/86",
+        "bp_status": "Stage 1 HTN",
+        "serum_potassium": 4.9,
+        "potassium_unit": "mEq/L",
+        "potassium_status": "High-Normal (Borderline)",
+        "last_inr": 1.1,
+        "inr_target": "N/A",
+        "inr_date": "Sep 30, 2024"
+      },
+      "medications": [
+        {
+          "id": "med-dc-01",
+          "rx_number": "Rx #44019-N",
+          "name": "Allopurinol",
+          "generic_name": "Allopurinol",
+          "dosage": "100 mg once daily with meal",
+          "strength": "100 mg",
+          "route": "Oral Tablet",
+          "cadence": "Once daily with food",
+          "status": "active",
+          "prescriber": "Dr. Marcus Reed (Nephrology)",
+          "start_date": "May 14, 2022",
+          "end_date": "Ongoing",
+          "refills": 2,
+          "indication": "Serum urate reduction in chronic gout",
+          "safety_target": "Renally adjusted dosing required (eGFR < 50). Monitor serum creatinine.",
+          "safety_status": "Reconciled",
+          "atc_class": "M04AA01",
+          "category": "Xanthine Oxidase Inhibitor"
+        }
+      ]
+    }
+  },
+  "patient": {
+    "id": "GK-8821",
+    "mrn": "RK-48810",
+    "name": "Ravi Kumar",
+    "age": 54,
+    "dob": "12-May-1968",
+    "gender": "Male",
+    "portal_status": "Active",
+    "ehr_sync": "RMC Epic EHR (Real-time)",
+    "next_review": "Nov 14, 2024",
+    "allergies": [
+      {
+        "allergen": "Penicillin",
+        "severity": "Critical",
+        "reaction": "Severe anaphylaxis",
+        "year": "2015"
+      },
+      {
+        "allergen": "Sulfonamides (\"Sulfa\")",
+        "severity": "Critical",
+        "reaction": "Severe Maculopapular Rash / Hives",
+        "year": "2018"
+      },
+      {
+        "allergen": "Codeine Phosphate",
+        "severity": "Moderate",
+        "reaction": "Nausea & Emesis (Documented Adverse Effect)",
+        "year": "2019"
+      }
+    ],
+    "diagnoses": [
+      {
+        "condition": "Atrial Fibrillation (Chronic)",
+        "icd10": "I48.20",
+        "status": "Active"
+      },
+      {
+        "condition": "Hypertension (Stage 1)",
+        "icd10": "I10",
+        "status": "Active"
+      },
+      {
+        "condition": "Osteoarthritis (Mild)",
+        "icd10": "M19.90",
+        "status": "Active"
+      }
+    ],
+    "biometrics": {
+      "egfr": 78,
+      "egfr_unit": "mL/min/1.73m\u00b2",
+      "egfr_stage": "Stage 2 (Mild decrease)",
+      "blood_pressure": "132/84",
+      "bp_status": "7-day mean",
+      "serum_potassium": 4.2,
+      "potassium_unit": "mEq/L",
+      "potassium_status": "Within Target Range",
+      "last_inr": 2.3,
+      "inr_target": "2.0-3.0",
+      "inr_date": "Oct 12, 2024"
+    },
+    "medications": [
+      {
+        "id": "med-001",
+        "rx_number": "Rx #99318-A",
+        "name": "Warfarin Sodium",
+        "generic_name": "Warfarin Sodium",
+        "dosage": "5 mg once daily, evening",
+        "strength": "5 mg",
+        "route": "Oral Tablet",
+        "cadence": "Evening (18:00)",
+        "status": "active",
+        "prescriber": "Dr. Elena Vance (Cardiology)",
+        "start_date": "Jan 14, 2023",
+        "end_date": "Ongoing",
+        "refills": 3,
+        "indication": "Thromboembolism prophylaxis for Atrial Fibrillation",
+        "safety_target": "Requires monthly INR monitoring (Last INR: 2.3 on Oct 12)",
+        "safety_status": "Reconciled",
+        "atc_class": "B01AA03",
+        "category": "Oral Anticoagulant \u2022 Vitamin K Antagonist"
+      },
+      {
+        "id": "med-002",
+        "rx_number": "Rx #10482-C",
+        "name": "Metoprolol Tartrate",
+        "generic_name": "Metoprolol Tartrate",
+        "dosage": "25 mg twice daily with meals",
+        "strength": "25 mg",
+        "route": "Oral Tablet",
+        "cadence": "Twice daily with meals",
+        "status": "active",
+        "prescriber": "Dr. Elena Vance (Cardiology)",
+        "start_date": "Mar 02, 2023",
+        "end_date": "Ongoing",
+        "refills": 5,
+        "indication": "Rate control & Blood pressure regulation",
+        "safety_target": "Take consistently with food; check resting pulse periodically (Resting HR 68 bpm)",
+        "safety_status": "Stable",
+        "atc_class": "C07AB02",
+        "category": "Beta-Adrenergic Blocker \u2022 Selective \u03b21"
+      },
+      {
+        "id": "med-003",
+        "rx_number": "Self-Reported Entry",
+        "name": "Ibuprofen",
+        "generic_name": "Ibuprofen",
+        "dosage": "400 mg as needed for joint ache",
+        "strength": "400 mg",
+        "route": "Oral Capsule/Tablet",
+        "cadence": "PRN ~3-4 times/week",
+        "status": "attention",
+        "prescriber": "Over-the-counter self-report",
+        "start_date": "Oct 18, 2024",
+        "end_date": "Ongoing",
+        "refills": 0,
+        "indication": "Right knee osteoarthritis ache / tension headache",
+        "safety_target": "High Potential Interaction Warning: Potential bleeding risk with ongoing Warfarin anticoagulant therapy. Concomitant NSAID usage significantly heightens upper gastrointestinal hemorrhage risk.",
+        "safety_status": "Physician Flagged for Nov 14",
+        "atc_class": "M01AE01",
+        "category": "Non-Steroidal Anti-Inflammatory (NSAID)"
+      },
+      {
+        "id": "med-004",
+        "rx_number": "Archived Rx #87102-L",
+        "name": "Lisinopril",
+        "generic_name": "Lisinopril",
+        "dosage": "10 mg daily",
+        "strength": "10 mg",
+        "route": "Oral Tablet",
+        "cadence": "Once daily",
+        "status": "archived",
+        "prescriber": "Dr. Marcus Reed (Internal Med)",
+        "start_date": "Aug 2022",
+        "end_date": "Feb 2023",
+        "refills": 0,
+        "indication": "Hypertension course terminated",
+        "safety_target": "Discontinued due to persistent dry cough side-effect. Replaced with alternative antihypertensive therapy protocol under supervision.",
+        "safety_status": "Safe Transition Verified",
+        "atc_class": "C09AA03",
+        "category": "ACE Inhibitor \u2022 Course Terminated"
+      }
+    ]
+  }
+}

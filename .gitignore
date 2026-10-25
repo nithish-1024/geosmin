@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv/
+env/
+venv/
+*.log
+.DS_Store
+Thumbs.db
+claude_chat.pdf
+chat_pages/
+frontend_images/
+.system_generated/
+scratch/

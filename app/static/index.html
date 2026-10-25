@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geosmin — Your medication story, safely shared | Medication Safety Platform</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"JetBrains Mono"', '"SF Mono"', 'Monaco', 'Inconsolata', 'monospace']
+          },
+          colors: {
+            navy: {
+              DEFAULT: '#1F3A5F',
+              hover: '#152943',
+              dark: '#0E1E33',
+              light: '#2A4D78',
+              50: '#F0F4F8'
+            },
+            teal: {
+              DEFAULT: '#2A7F85',
+              soft: '#E6F4F4',
+              light: '#EAF6F6',
+              hover: '#22696E',
+              border: '#A2D2D5'
+            },
+            sand: {
+              DEFAULT: '#FAF9F6',
+              50: '#FAF9F6',
+              100: '#F4F3EF',
+              200: '#EAE8E2',
+              300: '#D8D5CC'
+            }
+          },
+          boxShadow: {
+            'xs': '0 1px 2px 0 rgba(0, 0, 0, 0.04)',
+            'card': '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05)',
+            'elevated': '0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05)',
+            'beacon-red': '0 0 0 0 rgba(220, 38, 38, 0.3)',
+            'beacon-amber': '0 0 0 0 rgba(217, 119, 6, 0.3)',
+            'beacon-teal': '0 0 0 0 rgba(42, 127, 133, 0.3)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Inter, Playfair Display, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/static/css/custom.css">
+</head>
+<body class="bg-[#FAF9F6] text-slate-800 antialiased min-h-screen selection:bg-teal-100 selection:text-teal-900">
+  <!-- Screen reader live updates -->
+  <div id="sr-announcer" class="sr-only" aria-live="polite"></div>
+
+  <!-- App Mount Root -->
+  <div id="app-root"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col space-y-2 pointer-events-none"></div>
+
+  <!-- Warning Detail Modal -->
+  <div id="warning-detail-modal" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4"></div>
+
+  <!-- App Script -->
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

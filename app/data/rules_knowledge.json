@@ -1,0 +1,419 @@
+{
+  "drug_interactions": [
+    {
+      "drug_a": "celecoxib",
+      "drug_b": "warfarin",
+      "severity": "HIGH_RISK",
+      "category": "Drug-Drug Interaction",
+      "class_level": "FINDING #01 • CLASS 1",
+      "headline": "Potential Severe Hemorrhagic Sequelae",
+      "title": "Concomitant Warfarin and Celecoxib (NSAID/COX-2 inhibitor)",
+      "description": "Significantly elevated risk of upper gastrointestinal bleeding and anticoagulant potentiation. Celecoxib may increase prothrombin time / INR through competitive CYP2C9 metabolism and secondary platelet disruption.",
+      "evidence_source": "FDA Package Insert; CPIC Clinical Guideline 2023; Micromedex Class 1 Interaction. CYP2C9 intermediate metabolizer phenotype heightens risk.",
+      "clinical_uncertainty": "Patient's exact baseline platelet count and gastroprotective therapy status (e.g., concurrent PPI or H2RA use) are not recorded in the episodic health record."
+    },
+    {
+      "drug_a": "ibuprofen",
+      "drug_b": "warfarin",
+      "severity": "HIGH_RISK",
+      "category": "Drug-Drug Interaction",
+      "class_level": "CLASS 1 INTERACTION",
+      "headline": "Major Gastrointestinal Hemorrhage Hazard",
+      "title": "Concomitant Warfarin and OTC Ibuprofen (Non-Selective NSAID)",
+      "description": "Co-administration of non-selective NSAID with oral anticoagulant multiplies gastrointestinal bleeding odds by ~3-4x due to synergistic platelet COX-1 inhibition and anticoagulant-mediated hypocoagulability.",
+      "evidence_source": "FDA Black Box Warning; American College of Gastroenterology (ACG) Clinical Guidelines; DDInter Database v2.1.",
+      "clinical_uncertainty": "Exact daily PRN frequency and meal timing are self-reported and unquantified in hospital records."
+    },
+    {
+      "drug_a": "sildenafil",
+      "drug_b": "nitroglycerin",
+      "severity": "HIGH_RISK",
+      "category": "Drug-Drug Interaction",
+      "class_level": "CLASS 1 CONTRAINDICATION",
+      "headline": "Profound Refractory Vasodilatory Hypotension",
+      "title": "Concomitant PDE5 Inhibitor and Organic Nitrate",
+      "description": "Co-administration of sildenafil with nitrates causes synergistic accumulation of cyclic guanosine monophosphate (cGMP), triggering catastrophic systemic vasodilation, critical coronary hypoperfusion, and cardiogenic syncope.",
+      "evidence_source": "FDA Package Insert (Viagra/Revatio Section 4 Contraindications); ACC/AHA Guideline for Management of Ischemic Heart Disease.",
+      "clinical_uncertainty": "Timing of last nitrate dose and patient compliance with mandatory 24-hour nitrate-free interval are unverified."
+    }
+  ],
+  "duplicate_therapy": [
+    {
+      "class_name": "Non-Steroidal Anti-Inflammatory Drugs (NSAIDs)",
+      "drugs": ["celecoxib", "ibuprofen", "naproxen", "meloxicam", "diclofenac"],
+      "severity": "AMBER_REVIEW",
+      "category": "Duplicate Therapy & Renal Risk",
+      "class_level": "FINDING #02 • CATEGORY MODERATE",
+      "headline": "Therapeutic Duplication",
+      "title": "Concurrent self-reported Ibuprofen use with proposed NSAID",
+      "description": "Patient actively reports self-administering Ibuprofen 400 mg PRN. Adding Celecoxib creates duplicate NSAID therapy, accelerating the risk of acute reversible renal insufficiency, sodium retention, and gastric mucosal erosion.",
+      "evidence_source": "Beers Criteria 2023; Kidney Disease: Improving Global Outcomes (KDIGO) Clinical Practice Guideline for Acute Kidney Injury.",
+      "clinical_uncertainty": "Patient frequency of PRN Ibuprofen intake over the past 30 days is unquantified; last documented ingestion is unknown."
+    },
+    {
+      "class_name": "Beta-Adrenergic Blockers",
+      "drugs": ["metoprolol", "atenolol", "bisoprolol", "carvedilol", "propranolol"],
+      "severity": "AMBER_REVIEW",
+      "category": "Duplicate Beta-Blocker Therapy",
+      "class_level": "CATEGORY MODERATE • THERAPEUTIC DUPLICATION",
+      "headline": "Redundant Beta-Adrenergic Antagonism",
+      "title": "Duplicate Beta-Adrenergic Antagonist Regimen",
+      "description": "Concurrent administration of two beta-blockers provides no additive clinical benefit and multiplies the risk of severe sinus bradycardia, high-degree heart block, and profound systemic hypotension.",
+      "evidence_source": "ACC/AHA Guidelines for the Management of Heart Failure; FDA Package Insert.",
+      "clinical_uncertainty": "Resting bradycardia threshold and autonomic tone are unmeasured."
+    }
+  ],
+  "allergy_rules": [
+    {
+      "drug": "celecoxib",
+      "allergen_group": "sulfonamides",
+      "aliases": ["sulfa", "sulfonamide", "sulfonamides", "sulfa drugs"],
+      "severity": "UNABLE_TO_ASSESS",
+      "category": "Sulfa Allergy Cross-Reactivity",
+      "class_level": "FINDING #03 • OBSERVATIONAL",
+      "headline": "Chemical Moiety Assessment",
+      "title": "Celecoxib sulfonamide moiety in patient with Sulfa allergy",
+      "description": "Celecoxib contains a benzenesulfonamide moiety. Cross-reactivity with antimicrobial sulfonamides (e.g., sulfamethoxazole/trimethoprim) is structurally debated in current literature but warrants clinician vigilance regarding hypersensitivity history.",
+      "evidence_source": "American Academy of Allergy, Asthma & Immunology (AAAAI) Consensus Statement on Non-Arylamine Sulfonamides; FDA Package Insert (Celebrex).",
+      "clinical_uncertainty": "Exact chemical nature of patient's historical 'Sulfa' reaction is unconfirmed (benign delayed contact dermatosis vs systemic anaphylaxis)."
+    },
+    {
+      "drug": "amoxicillin",
+      "allergen_group": "penicillin",
+      "aliases": ["penicillin", "penicillins", "beta-lactam"],
+      "severity": "HIGH_RISK",
+      "category": "Severe IgE-Mediated Allergy Contraindication",
+      "class_level": "CLASS 1 CONTRAINDICATION",
+      "headline": "Anaphylaxis Precaution",
+      "title": "Direct Penicillin Cross-Allergy with Proposed Aminopenicillin",
+      "description": "Cross-reactivity with patient's documented severe penicillin anaphylaxis history carries imminent life-threatening anaphylactic shock risk.",
+      "evidence_source": "Joint Task Force on Practice Parameters (AAAAI/ACAAI) Drug Allergy Guideline; FDA Package Insert (Amoxil).",
+      "clinical_uncertainty": "Skin testing or specific IgE titers have not been performed recently."
+    }
+  ],
+  "disease_contraindications": [
+    {
+      "drug": "celecoxib",
+      "condition": "severe hypertension",
+      "aliases": ["severe hypertension", "uncontrolled hypertension", "malignant hypertension", "hypertensive crisis"],
+      "severity": "AMBER_REVIEW",
+      "category": "Drug-Disease Warning",
+      "class_level": "CATEGORY MODERATE • CARDIOVASCULAR WARNING",
+      "headline": "Hypertension Exacerbation Hazard",
+      "title": "COX-2 Inhibitor Fluid Retention in Severe Hypertension",
+      "description": "Celecoxib inhibits renal prostaglandin synthesis, causing modest sodium and water retention that can blunt antihypertensive efficacy and raise mean arterial blood pressure by 2-5 mmHg.",
+      "evidence_source": "ACC/AHA High Blood Pressure Clinical Practice Guideline 2023; FDA Package Insert (Celebrex).",
+      "clinical_uncertainty": "Home BP log compliance and dietary sodium intake are not tracked real-time."
+    },
+    {
+      "drug": "metoprolol",
+      "condition": "asthma",
+      "aliases": ["asthma", "bronchial asthma", "bronchospasm", "reactive airway disease", "copd", "chronic obstructive pulmonary disease"],
+      "severity": "HIGH_RISK",
+      "category": "Drug-Disease Contraindication",
+      "class_level": "CLASS 1 CONTRAINDICATION • RESPIRATORY HAZARD",
+      "headline": "Severe Bronchospastic Airway Compromise",
+      "title": "Metoprolol (Beta-1 Blocker) in Bronchial Asthma / Reactive Airway Disease",
+      "description": "Beta-adrenergic antagonism, even with cardioselective beta-1 agents like Metoprolol, exhibits dose-dependent competitive antagonism of bronchial beta-2 receptors. In patients with asthma or reactive airway disease, this precipitates acute bronchospasm, refractory status asthmaticus, and directly blunts emergency beta-2 agonist rescue inhalers.",
+      "evidence_source": "FDA Package Insert (Lopressor / Toprol-XL Boxed Precautions); Global Initiative for Asthma (GINA) Guidelines 2023; Global Initiative for Chronic Obstructive Lung Disease (GOLD) Report 2023.",
+      "clinical_uncertainty": "Baseline FEV1/FVC spirometry ratio, current airway reactivity state, and patient's individual cardioselectivity margin at target dose are unmeasured."
+    },
+    {
+      "drug": "atorvastatin",
+      "condition": "hepatic impairment",
+      "aliases": ["hepatic impairment", "active liver disease", "cirrhosis", "hepatitis", "acute liver injury", "elevated transaminases", "liver disease"],
+      "severity": "HIGH_RISK",
+      "category": "Drug-Disease Contraindication",
+      "class_level": "CLASS 1 CONTRAINDICATION • HEPATOTOXICITY HAZARD",
+      "headline": "Hepatic Clearance Impairment & Hepatotoxicity Hazard",
+      "title": "Atorvastatin (Statin) in Active Liver Disease / Cirrhosis",
+      "description": "Atorvastatin undergoes extensive hepatic uptake and biliary elimination. Administration in patients with active liver disease, cirrhosis, or unexplained persistent transaminase elevations results in severe drug accumulation, multiplying the risk of acute hepatic decompensation, elevated serum aminotransferases, and secondary lethal rhabdomyolysis.",
+      "evidence_source": "FDA Package Insert (Lipitor Section 4 Contraindications: Active Hepatic Disease); American Association for the Study of Liver Diseases (AASLD) Practice Guidance 2023; CPIC Guideline for Statins.",
+      "clinical_uncertainty": "Serum ALT/AST/alkaline phosphatase, total bilirubin, and Child-Pugh score within the past 30 days are unrecorded in current EHR telemetry."
+    },
+    {
+      "drug": "metformin",
+      "condition": "chronic kidney disease",
+      "aliases": ["chronic kidney disease", "ckd", "renal impairment", "renal failure", "kidney failure", "severe renal insufficiency", "end stage renal disease"],
+      "severity": "HIGH_RISK",
+      "category": "Drug-Disease Contraindication",
+      "class_level": "CLASS 1 CONTRAINDICATION • METABOLIC COLLAPSE",
+      "headline": "Fatal Lactic Acidosis Risk in Renal Impairment",
+      "title": "Metformin in Chronic Kidney Disease (eGFR < 30 mL/min/1.73m²)",
+      "description": "Metformin is cleared primarily through renal tubular secretion. In moderate-to-severe renal impairment (eGFR < 30 mL/min/1.73m²), impaired excretion causes systemic drug accumulation, inhibiting mitochondrial respiratory chain complex I and precipitating rapid, life-threatening lactic acidosis with ~50% mortality.",
+      "evidence_source": "FDA Boxed Warning (Metformin Hydrochloride Lactic Acidosis); KDIGO 2023 Clinical Practice Guideline for Diabetes Management in Chronic Kidney Disease.",
+      "clinical_uncertainty": "Acute-on-chronic GFR fluctuation, current intravascular hydration status, and exposure to nephrotoxic contrast agents within 48 hours are unverified."
+    },
+    {
+      "drug": "celecoxib",
+      "condition": "heart failure",
+      "aliases": ["heart failure", "congestive heart failure", "chf", "cardiomyopathy", "nyha class iii", "nyha class iv"],
+      "severity": "HIGH_RISK",
+      "category": "Drug-Disease Contraindication",
+      "class_level": "CLASS 1 CONTRAINDICATION • CARDIOVASCULAR COLLAPSE",
+      "headline": "Severe Myocardial Decompensation & Fluid Retention",
+      "title": "Celecoxib in Congestive Heart Failure (NYHA Class III-IV)",
+      "description": "Inhibition of renal COX-2-derived prostacyclin (PGI2) and PGE2 diminishes renal blood flow, impairs natriuresis, increases systemic vascular resistance, and blunts diuretic response. In heart failure patients, this triggers acute decompensation, pulmonary edema, and significantly elevated cardiovascular mortality.",
+      "evidence_source": "FDA Black Box Warning (Celebrex Cardiovascular Thrombotic and Heart Failure Risk); AHA/ACC/HFSA 2022 Guideline for the Management of Heart Failure.",
+      "clinical_uncertainty": "Current left ventricular ejection fraction (LVEF), recent dry weight trend, and serum NT-proBNP levels are not documented in immediate session telemetry."
+    },
+    {
+      "drug": "warfarin",
+      "condition": "peptic ulcer disease",
+      "aliases": ["peptic ulcer disease", "peptic ulcer", "pud", "gastrointestinal bleeding", "gi bleed", "gastric ulcer", "duodenal ulcer", "gastrointestinal hemorrhage"],
+      "severity": "HIGH_RISK",
+      "category": "Drug-Disease Contraindication",
+      "class_level": "CLASS 1 CONTRAINDICATION • EXSANGUINATION HAZARD",
+      "headline": "Catastrophic Mucosal Hemorrhage Hazard",
+      "title": "Warfarin Anticoagulation in Active Peptic Ulcer Disease",
+      "description": "Vitamin K antagonist oral anticoagulation suppresses hepatic synthesis of functional clotting factors II, VII, IX, and X. In patients with active gastrointestinal ulcerative lesions or mucosal vascular defects, systemic hypocoagulability induces uncontrolled, life-threatening gastrointestinal hemorrhage.",
+      "evidence_source": "FDA Boxed Warning (Coumadin Bleeding Risk); American College of Gastroenterology (ACG) Clinical Guidelines on Anticoagulation in GI Bleeding; CHEST Antithrombotic Guidelines.",
+      "clinical_uncertainty": "Recent endoscopic mucosal surveillance and Helicobacter pylori eradication verification are absent from the episodic record."
+    },
+    {
+      "drug": "lisinopril",
+      "condition": "renal artery stenosis",
+      "aliases": ["renal artery stenosis", "bilateral renal artery stenosis", "ras", "renovascular disease"],
+      "severity": "HIGH_RISK",
+      "category": "Drug-Disease Contraindication",
+      "class_level": "CLASS 1 CONTRAINDICATION • RENAL COLLAPSE HAZARD",
+      "headline": "Abrupt Glomerular Filtration Failure",
+      "title": "Lisinopril in Bilateral Renal Artery Stenosis",
+      "description": "ACE inhibitors eliminate angiotensin II-mediated efferent renal arteriolar vasoconstriction. In bilateral renal artery stenosis, maintenance of glomerular hydrostatic filtration pressure depends strictly on efferent tone; ACE inhibition induces acute anuric renal failure.",
+      "evidence_source": "FDA Package Insert (Prinivil/Zestril Warnings); KDIGO 2021 Clinical Practice Guideline for Management of Blood Pressure in CKD; ACC/AHA Hypertension Guidelines.",
+      "clinical_uncertainty": "Renal vascular duplex Doppler ultrasound resistive index and pre-existing renal parenchymal reserve are unrecorded."
+    },
+    {
+      "drug": "ciprofloxacin",
+      "condition": "myasthenia gravis",
+      "aliases": ["myasthenia gravis", "myasthenia"],
+      "severity": "HIGH_RISK",
+      "category": "Drug-Disease Contraindication",
+      "class_level": "CLASS 1 CONTRAINDICATION • NEUROMUSCULAR CRISIS",
+      "headline": "Neuromuscular Respiratory Paralysis Hazard",
+      "title": "Ciprofloxacin in Myasthenia Gravis",
+      "description": "Fluoroquinolones exhibit neuromuscular junction blocking activity that impairs acetylcholine release and post-synaptic transmission, precipitating life-threatening exacerbation of myasthenia gravis, diaphragmatic weakness, and respiratory failure requiring mechanical ventilation.",
+      "evidence_source": "FDA Black Box Warning (Fluoroquinolones Exacerbation of Myasthenia Gravis); Myasthenia Gravis Foundation of America (MGFA) Clinical Advisory.",
+      "clinical_uncertainty": "Current anti-AChR or anti-MuSK antibody titers, pyridostigmine dosing regimen, and baseline forced vital capacity (FVC) are unmeasured."
+    },
+    {
+      "drug": "digoxin",
+      "condition": "hypokalemia",
+      "aliases": ["hypokalemia", "low potassium", "hypomagnesemia"],
+      "severity": "HIGH_RISK",
+      "category": "Drug-Disease / Electrolyte Contraindication",
+      "class_level": "CLASS 1 CONTRAINDICATION • LETHAL ARRHYTHMIA HAZARD",
+      "headline": "Malignant Digitalis Toxicity & Ventricular Fibrillation",
+      "title": "Digoxin in Documented Hypokalemia (K+ < 3.5 mEq/L)",
+      "description": "Extracellular potassium competitively inhibits digoxin binding to myocardial sarcolemmal Na+/K+-ATPase. Hypokalemia drastically enhances digoxin receptor binding affinity and toxicity, inducing severe delayed afterdepolarizations, bidirectional ventricular tachycardia, ventricular fibrillation, and sudden cardiac arrest.",
+      "evidence_source": "FDA Package Insert (Lanoxin Warnings); AHA/ACC/HRS Guideline for Management of Patients With Ventricular Arrhythmias; KDIGO Clinical Practice Guidelines.",
+      "clinical_uncertainty": "Serial 12-lead ECG telemetry (PR/QT intervals), serum ionized magnesium levels, and concurrent loop diuretic kaluresis are unverified."
+    },
+    {
+      "drug": "allopurinol",
+      "condition": "chronic kidney disease",
+      "aliases": ["chronic kidney disease", "ckd", "renal impairment", "renal failure", "kidney failure"],
+      "severity": "HIGH_RISK",
+      "category": "Drug-Disease Contraindication",
+      "class_level": "CLASS 1 CONTRAINDICATION • HYPERSENSITIVITY COLLAPSE",
+      "headline": "Allopurinol Hypersensitivity Syndrome & Oxypurinol Accumulation",
+      "title": "Allopurinol in Severe Renal Impairment (eGFR < 30 mL/min/1.73m²)",
+      "description": "Allopurinol's active metabolite, oxypurinol, is excreted entirely by the kidneys. In severe renal impairment, prolonged oxypurinol half-life causes massive systemic accumulation, precipitating life-threatening Allopurinol Hypersensitivity Syndrome (AHS), toxic epidermal necrolysis, and acute bone marrow suppression.",
+      "evidence_source": "FDA Package Insert (Zyloprim Renal Dosing); CPIC Guideline for Allopurinol and HLA-B*58:01; KDIGO 2023 CKD Clinical Practice Guideline.",
+      "clinical_uncertainty": "HLA-B*58:01 allele carrier status (high risk for Stevens-Johnson Syndrome/TEN) and baseline serum urate clearance are unrecorded."
+    },
+    {
+      "drug": "sildenafil",
+      "condition": "hypotension",
+      "aliases": ["hypotension", "severe hypotension", "shock", "syncope", "unstable angina"],
+      "severity": "HIGH_RISK",
+      "category": "Drug-Disease Contraindication",
+      "class_level": "CLASS 1 CONTRAINDICATION • HEMODYNAMIC COLLAPSE",
+      "headline": "Refractory Hypotension & Vascular Collapse",
+      "title": "Sildenafil in Baseline Hypotension / Hemodynamic Instability",
+      "description": "Sildenafil causes systemic pulmonary and peripheral arterial vasodilation through cGMP upregulation. In patients with baseline hypotension (resting BP < 90/50 mmHg), administration risks critical cerebral and myocardial hypoperfusion.",
+      "evidence_source": "FDA Package Insert (Viagra/Revatio Section 4 Contraindications); AHA/ACC Guidelines for Coronary Artery Disease.",
+      "clinical_uncertainty": "Continuous arterial pressure line monitoring and intravascular volume filling pressures are unmeasured."
+    },
+    {
+      "drug": "ciprofloxacin",
+      "condition": "long qt syndrome",
+      "aliases": ["long qt syndrome", "qt prolongation", "prolonged qt", "torsades de pointes", "ventricular arrhythmia"],
+      "severity": "HIGH_RISK",
+      "category": "Drug-Disease Contraindication",
+      "class_level": "CLASS 1 CONTRAINDICATION • TORSADES DE POINTES HAZARD",
+      "headline": "Malignant Cardiac Ventricular Arrhythmia",
+      "title": "Ciprofloxacin in Congenital or Acquired Long QT Syndrome",
+      "description": "Fluoroquinolones block the rapid component of the cardiac delayed rectifier potassium current (IKr) via hERG channels, prolonging myocardial ventricular repolarization (QT interval) and precipitating polymorphic ventricular tachycardia (Torsades de Pointes) and fatal ventricular fibrillation.",
+      "evidence_source": "FDA Boxed Warning (Fluoroquinolones QT Prolongation); CredibleMeds List of Drugs with Known Risk of Torsades de Pointes; AHA/ACC/HRS Guidelines.",
+      "clinical_uncertainty": "Baseline QTc interval on 12-lead ECG, concurrent QT-prolonging medications, and serum magnesium levels are unmeasured."
+    }
+  ],
+  "dosage_bound_rules": [
+    {
+      "drug": "atorvastatin",
+      "max_single_dose_mg": 80,
+      "max_daily_dose_mg": 80,
+      "renal_egfr_threshold": 30,
+      "max_dose_in_renal_impairment_mg": 20,
+      "severity": "HIGH_RISK",
+      "category": "Dosage Bound & Toxicity Hazard",
+      "class_level": "CLASS 1 DOSAGE BOUND VIOLATION",
+      "headline": "Severe Statin Overexposure & Rhabdomyolysis Risk",
+      "title": "Atorvastatin Prescribed Above FDA Maximum Recommended Daily Limit (80 mg/day)",
+      "description": "Prescription exceeds the FDA-established absolute ceiling dose of 80 mg daily. Supratherapeutic statin exposure causes systemic accumulation, drastically elevating risk of statin-induced necrotizing autoimmune myopathy, severe creatine kinase elevation, and acute renal failure secondary to rhabdomyolysis.",
+      "evidence_source": "FDA Package Insert (Lipitor Section 2: Dosage and Administration); CPIC Guideline for SLCO1B1 and Statin-Induced Musculoskeletal Symptoms (2022); ACC/AHA Multi-Society Cholesterol Guideline.",
+      "clinical_uncertainty": "Patient SLCO1B1 rs4149056 phenotype (c.521T>C) and concurrent intake of dietary CYP3A4 inhibitors (e.g. grapefruit juice) are unquantified."
+    },
+    {
+      "drug": "metoprolol",
+      "max_single_dose_mg": 200,
+      "max_daily_dose_mg": 400,
+      "severity": "HIGH_RISK",
+      "category": "Dosage Bound & Hemodynamic Hazard",
+      "class_level": "CLASS 1 DOSAGE BOUND VIOLATION",
+      "headline": "Profound Bradycardia & Cardiogenic Collapse Hazard",
+      "title": "Metoprolol Exceeds Maximum Approved Daily Dosing Threshold (400 mg/day)",
+      "description": "Metoprolol daily dose exceeds the maximum recommended ceiling of 400 mg/day (or 200 mg single dose). Supratherapeutic dosages eliminate beta-1 cardioselectivity, inducing severe systemic beta-blockade, profound sinus bradycardia, high-grade atrioventricular conduction block, and cardiogenic shock.",
+      "evidence_source": "FDA Package Insert (Lopressor / Toprol-XL Dosage and Administration); ACC/AHA Guideline for the Management of Heart Failure 2022.",
+      "clinical_uncertainty": "CYP2D6 extensive vs poor metabolizer phenotype, resting baseline heart rate, and 24-hour continuous cardiac rhythm telemetry are unverified."
+    },
+    {
+      "drug": "celecoxib",
+      "max_single_dose_mg": 200,
+      "max_daily_dose_mg": 400,
+      "severity": "HIGH_RISK",
+      "category": "Dosage Bound & Cardiovascular Hazard",
+      "class_level": "CLASS 1 DOSAGE BOUND VIOLATION",
+      "headline": "Supratherapeutic COX-2 Overexposure & Thrombotic Risk",
+      "title": "Celecoxib Daily Dose Exceeds Approved Upper Limit (400 mg/day)",
+      "description": "Prescribed dose surpasses the maximum therapeutic ceiling of 400 mg/day (or >200 mg single dose). Supratherapeutic exposure confers no additional analgesic efficacy while multiplying the risk of fatal myocardial infarction, stroke, acute tubular necrosis, and severe gastrointestinal perforation.",
+      "evidence_source": "FDA Black Box Warning (Celebrex Section 2: Dosage and Administration); CPIC Guideline for CYP2C9 and NSAIDs (2020); KDIGO Clinical Practice Guideline for AKI.",
+      "clinical_uncertainty": "Patient CYP2C9 genotype (poor vs normal metabolizer status) and cumulative duration of supratherapeutic dosing are unverified."
+    },
+    {
+      "drug": "ibuprofen",
+      "max_single_dose_mg": 800,
+      "max_daily_dose_mg": 2400,
+      "renal_egfr_threshold": 60,
+      "severity": "HIGH_RISK",
+      "category": "Dosage Bound & Nephrotoxicity Hazard",
+      "class_level": "CLASS 1 DOSAGE BOUND VIOLATION",
+      "headline": "Nephrotoxic NSAID Overexposure & Acute Kidney Injury",
+      "title": "Ibuprofen Dosage Exceeds Maximum Therapeutic Upper Limit (2400 mg/day)",
+      "description": "Prescription exceeds the absolute ceiling of 2400 mg/day (or >800 mg single dose). In high dosages, non-selective COX-1/COX-2 inhibition causes profound renal vasoconstriction, acute interstitial nephritis, papillary necrosis, and massive upper GI bleeding.",
+      "evidence_source": "FDA Package Insert (Motrin Section 2 Dosage and Administration); KDIGO Clinical Practice Guideline for Acute Kidney Injury 2023; Beers Criteria 2023.",
+      "clinical_uncertainty": "Patient's concurrent OTC analgesic consumption and baseline serum creatinine trajectory over past 3 months are unverified."
+    },
+    {
+      "drug": "allopurinol",
+      "max_single_dose_mg": 300,
+      "max_daily_dose_mg": 800,
+      "renal_egfr_threshold": 60,
+      "max_dose_in_renal_impairment_mg": 200,
+      "severity": "HIGH_RISK",
+      "category": "Dosage-Renal Bound Violation",
+      "class_level": "CLASS 1 DOSAGE-RENAL THRESHOLD VIOLATION",
+      "headline": "Allopurinol Hypersensitivity Syndrome & Oxypurinol Accumulation",
+      "title": "Allopurinol Dose Exceeds Renal Impairment Threshold (eGFR < 60 mL/min)",
+      "description": "In patients with reduced renal filtration (eGFR < 60 mL/min), allopurinol's active metabolite oxypurinol is retained, exponentially increasing the risk of life-threatening Allopurinol Hypersensitivity Syndrome (AHS), toxic epidermal necrolysis (TEN), and severe aplastic marrow failure.",
+      "evidence_source": "FDA Package Insert (Zyloprim Dosage in Renal Impairment); CPIC Guideline for Allopurinol and HLA-B*58:01; KDIGO CKD Guidelines 2023.",
+      "clinical_uncertainty": "HLA-B*58:01 genotype status (high risk in Southeast Asian / African descent) and current urinary protein-to-creatinine ratio are unrecorded."
+    },
+    {
+      "drug": "metformin",
+      "max_single_dose_mg": 1000,
+      "max_daily_dose_mg": 2550,
+      "renal_egfr_threshold": 45,
+      "max_dose_in_renal_impairment_mg": 1000,
+      "renal_contraindication_egfr": 30,
+      "severity": "HIGH_RISK",
+      "category": "Dosage-Renal Bound Violation",
+      "class_level": "CLASS 1 RENAL-DOSAGE THRESHOLD VIOLATION",
+      "headline": "Lactic Acidosis Renal Dosage Threshold Exceeded",
+      "title": "Metformin Dosage Exceeds KDIGO/FDA Renal Bounds (eGFR < 45 mL/min)",
+      "description": "Metformin dosing exceeds recommended thresholds in renal impairment. For eGFR 30-44 mL/min, maximum recommended dose is 1000 mg/day; for eGFR < 30 mL/min, metformin is strictly contraindicated due to rapid accumulation and fatal lactic acidosis risk.",
+      "evidence_source": "FDA Drug Safety Communication: Revised Safety Warnings for Metformin in Reduced Kidney Function; KDIGO 2023 Diabetes in CKD Guidelines.",
+      "clinical_uncertainty": "Acute hemodynamic instability, intravascular volume contraction, or recent iodinated radiocontrast procedure are unverified."
+    },
+    {
+      "drug": "digoxin",
+      "max_single_dose_mg": 0.25,
+      "max_daily_dose_mg": 0.25,
+      "renal_egfr_threshold": 50,
+      "max_dose_in_renal_impairment_mg": 0.125,
+      "hypokalemia_threshold_meq": 3.5,
+      "severity": "HIGH_RISK",
+      "category": "Dosage Bound & Narrow Therapeutic Index",
+      "class_level": "CLASS 1 DOSAGE BOUND VIOLATION",
+      "headline": "Digitalis Narrow Therapeutic Index Exceeded",
+      "title": "Digoxin Dose Exceeds Narrow Therapeutic Safety Window (0.25 mg/day)",
+      "description": "Digoxin possesses an exceptionally narrow therapeutic window (serum target 0.5-0.9 ng/mL). Doses exceeding 0.25 mg daily (or >0.125 mg in renal impairment) saturate clearance mechanisms, triggering lethal ventricular tachyarrhythmias and progressive heart block.",
+      "evidence_source": "FDA Package Insert (Lanoxin Dosage & Administration); AHA/ACC Guidelines for Heart Failure; KDIGO Clinical Practice Guidelines.",
+      "clinical_uncertainty": "Pre-dose trough serum digoxin concentration, lean body mass adjustment, and concomitant P-glycoprotein inhibitor use are unmeasured."
+    },
+    {
+      "drug": "ciprofloxacin",
+      "max_single_dose_mg": 750,
+      "max_daily_dose_mg": 1500,
+      "renal_egfr_threshold": 30,
+      "max_dose_in_renal_impairment_mg": 500,
+      "severity": "HIGH_RISK",
+      "category": "Dosage Bound & Renal Clearance Violation",
+      "class_level": "CLASS 1 DOSAGE BOUND VIOLATION",
+      "headline": "Fluoroquinolone Overexposure & Neurotoxicity Hazard",
+      "title": "Ciprofloxacin Daily Dose Exceeds Maximum Safety Limit (1500 mg/day)",
+      "description": "Prescription surpasses the maximum approved ceiling of 1500 mg daily (or 500 mg/day in severe renal impairment eGFR < 30 mL/min). Supratherapeutic levels induce severe neurotoxicity, tendon rupture, and marked QT prolongation.",
+      "evidence_source": "FDA Black Box Warning (Cipro Dosage and Administration); KDIGO 2023 Guidelines; CredibleMeds QT Registry.",
+      "clinical_uncertainty": "Concurrent ingestion of di/trivalent cations (calcium, iron, antacids) altering bio-absorption is unquantified."
+    }
+  ],
+  "dosage_limits": {
+    "celecoxib": {
+      "max_single_dose_mg": 200,
+      "max_daily_dose_mg": 400,
+      "recommended_osteoarthritis_daily_mg": 200,
+      "unit": "mg"
+    },
+    "ibuprofen": {
+      "max_single_dose_mg": 800,
+      "max_daily_dose_mg": 2400,
+      "unit": "mg"
+    },
+    "warfarin": {
+      "requires_therapeutic_monitoring": true,
+      "target_marker": "INR",
+      "standard_range": "2.0-3.0"
+    },
+    "metoprolol": {
+      "max_single_dose_mg": 200,
+      "max_daily_dose_mg": 400,
+      "unit": "mg"
+    },
+    "atorvastatin": {
+      "max_single_dose_mg": 80,
+      "max_daily_dose_mg": 80,
+      "unit": "mg"
+    },
+    "metformin": {
+      "max_single_dose_mg": 1000,
+      "max_daily_dose_mg": 2550,
+      "unit": "mg"
+    },
+    "allopurinol": {
+      "max_single_dose_mg": 300,
+      "max_daily_dose_mg": 800,
+      "unit": "mg"
+    },
+    "digoxin": {
+      "max_single_dose_mg": 0.25,
+      "max_daily_dose_mg": 0.25,
+      "unit": "mg"
+    },
+    "ciprofloxacin": {
+      "max_single_dose_mg": 750,
+      "max_daily_dose_mg": 1500,
+      "unit": "mg"
+    }
+  }
+}
