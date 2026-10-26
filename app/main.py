@@ -21,13 +21,22 @@ from app.security.ephemeral_gateway import ephemeral_gateway
 from app.security.audit_logger import audit_logger
 from app.services.safety_engine import safety_engine
 from app.services.rxnorm_normalizer import rxnorm_normalizer
-from app.services.knowledge_graph import knowledge_graph
+from app.services.knowledge_graph import knowledge_graph, graph_router
+from app.routers import auth_router, tokens_router, patients_router, speech_router
 
 app = FastAPI(
     title="Geosmin Clinical Safety Platform",
     description="A medication safety platform connecting patient history with algorithmic pharmacological verification.",
-    version="1.0.0"
+    version="2.0.0"
 )
+
+# Mount Geosmin 2.0 modular production routers
+app.include_router(auth_router)
+app.include_router(tokens_router)
+app.include_router(patients_router)
+if speech_router:
+    app.include_router(speech_router)
+app.include_router(graph_router)
 
 app.add_middleware(
     CORSMiddleware,

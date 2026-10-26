@@ -184,3 +184,253 @@ body {
     animation: none !important;
   }
 }
+
+/* --- MEDICAL VOICE & AUDIO ENGINEERING STYLES --- */
+
+/* Ripple rings for active voice recording */
+.ripple-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ripple-ring {
+  position: absolute;
+  border-radius: 9999px;
+  border: 2px solid rgba(42, 127, 133, 0.4);
+  pointer-events: none;
+  animation: rippleRing 2s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+}
+
+.ripple-ring:nth-child(1) {
+  width: 54px;
+  height: 54px;
+  animation-delay: 0s;
+}
+
+.ripple-ring:nth-child(2) {
+  width: 72px;
+  height: 72px;
+  animation-delay: 0.5s;
+}
+
+.ripple-ring:nth-child(3) {
+  width: 90px;
+  height: 90px;
+  animation-delay: 1s;
+}
+
+@keyframes rippleRing {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.45);
+    opacity: 0;
+  }
+}
+
+/* Audio VU Meter LED Bar */
+.vu-meter-track {
+  height: 8px;
+  background-color: #E2E8F0;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.vu-meter-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #10B981 0%, #F59E0B 75%, #EF4444 100%);
+  transition: width 0.08s ease-out;
+}
+
+/* Real-time Oscilloscope Waveform Canvas */
+.waveform-canvas {
+  width: 100%;
+  height: 54px;
+  background: #0E1E33;
+  border-radius: 12px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+  display: block;
+}
+
+/* Token Confidence Pills & Amber Highlights */
+.token-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  margin: 3px 4px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.4;
+  position: relative;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.token-green {
+  background-color: #F0FDF4;
+  border: 1px solid #BBF7D0;
+  color: #166534;
+}
+
+.token-amber {
+  background-color: #FEF3C7;
+  border: 1.5px solid #F59E0B;
+  color: #92400E;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(245, 158, 11, 0.15);
+}
+
+.token-amber:hover {
+  background-color: #FDE68A;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(245, 158, 11, 0.25);
+}
+
+.token-conf-badge {
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  margin-left: 5px;
+  opacity: 0.85;
+}
+
+/* Suggestion Popover Tooltip */
+.suggestion-popover {
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  background: #1F3A5F;
+  color: #FFFFFF;
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.35);
+  font-size: 11px;
+  white-space: nowrap;
+  animation: fadeInDown 0.15s ease-out;
+}
+
+.suggestion-popover::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #1F3A5F transparent transparent transparent;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translate(-50%, 6px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* Vernacular Code-switch Tag */
+.vernacular-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 500;
+  background-color: #E6F4F4;
+  color: #1F3A5F;
+  border: 1px solid #A2D2D5;
+}
+
+/* =========================================================================
+   PHARMACOLOGICAL KNOWLEDGE GRAPH VISUALIZER STYLES
+   (Senior Frontend Canvas Architect: pixel-penguin-ui & motion-magic-moth)
+   ========================================================================= */
+
+/* Canvas base container */
+#pgv-cy-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+}
+
+/* Electric Neural Pulse Ray Traversal Glow */
+@keyframes rayBeamPulse {
+  0% {
+    filter: drop-shadow(0 0 2px #00F0FF);
+  }
+  50% {
+    filter: drop-shadow(0 0 14px #00F0FF) drop-shadow(0 0 24px rgba(0, 240, 255, 0.6));
+  }
+  100% {
+    filter: drop-shadow(0 0 2px #00F0FF);
+  }
+}
+
+/* Collision Shockwave Expanding Rings */
+@keyframes shockwaveExpand {
+  0% {
+    transform: translate(-50%, -50%) scale(0.2);
+    opacity: 1;
+    border-width: 4px;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.8);
+    opacity: 0;
+    border-width: 1px;
+  }
+}
+
+.shockwave-ring {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+  animation: shockwaveExpand 1.2s cubic-bezier(0.1, 0.85, 0.25, 1) forwards;
+}
+
+/* Glowing Emerald Safety Shield */
+@keyframes shieldAuraGlow {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.4), inset 0 0 4px rgba(16, 185, 129, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(16, 185, 129, 0.85), inset 0 0 10px rgba(16, 185, 129, 0.5);
+  }
+}
+
+.shield-aura {
+  animation: shieldAuraGlow 2.5s ease-in-out infinite;
+}
+
+/* Linear/Vercel Glassmorphic Drawer Shadow */
+#pgv-evidence-drawer {
+  box-shadow: -8px 0 32px -4px rgba(0, 0, 0, 0.5);
+}
+
+/* Dot matrix canvas animation background */
+.dot-matrix-bg {
+  background-image: radial-gradient(rgba(148, 163, 184, 0.15) 1.5px, transparent 1.5px);
+  background-size: 20px 20px;
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .shockwave-ring, #pgv-evidence-drawer, .shield-aura {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+

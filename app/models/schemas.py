@@ -119,6 +119,11 @@ class RxNormValidationResponse(BaseModel):
     therapeutic_class: str
     dietary_guideline: Optional[str] = None
     verification_summary: str
+    status: Optional[str] = "resolved"
+    generic_name: Optional[str] = None
+    brand_aliases: Optional[List[str]] = None
+    disambiguation_options: Optional[List[Dict[str, Any]]] = None
+    lasa_warning: Optional[str] = None
 
 # --- Prescribing & Safety Analysis Models ---
 class PrescribeNewMedicationRequest(BaseModel):

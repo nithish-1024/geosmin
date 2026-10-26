@@ -13,3 +13,9 @@ chat_pages/
 frontend_images/
 .system_generated/
 scratch/
+*.sqlite
+*.sqlite3
+*.db
+*.db-wal
+*.db-shm
+
