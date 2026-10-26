@@ -1,5 +1,6 @@
 import json
 import os
+from contextlib import asynccontextmanager
 from typing import Dict, Any, List
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.staticfiles import StaticFiles
@@ -15,19 +16,28 @@ from app.models.schemas import (
     AddMedicationRequest,
     RxNormValidationResponse,
     PrescribeNewMedicationRequest,
-    SafetyReportResponse
+    SafetyReportResponse,
+    ClinicalFinding
 )
 from app.security.ephemeral_gateway import ephemeral_gateway
 from app.security.audit_logger import audit_logger
+from app.security.session_reaper import session_reaper
 from app.services.safety_engine import safety_engine
 from app.services.rxnorm_normalizer import rxnorm_normalizer
 from app.services.knowledge_graph import knowledge_graph, graph_router
 from app.routers import auth_router, tokens_router, patients_router, speech_router
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    session_reaper.start()
+    yield
+    session_reaper.stop()
+
 app = FastAPI(
     title="Geosmin Clinical Safety Platform",
     description="A medication safety platform connecting patient history with algorithmic pharmacological verification.",
-    version="2.0.0"
+    version="2.0.0",
+    lifespan=lifespan
 )
 
 # Mount Geosmin 2.0 modular production routers
@@ -199,38 +209,84 @@ def doctor_access_ledger(req: DoctorAccessRequest):
 
     granted_list = [k.capitalize() for k, v in scopes.items() if v]
 
-    return DoctorSessionData(
+    # Assemble canonical payload for cryptographic signing
+    payload_dict = {
+        "session_id": record["session_id"],
+        "patient_name": patient["name"],
+        "patient_age": patient["age"],
+        "dob": patient["dob"],
+        "mrn": patient["mrn"],
+        "expires_in_seconds": 300,
+        "scopes_granted": granted_list,
+        "allergies": allergies,
+        "diagnoses": diagnoses,
+        "biometrics": biometrics,
+        "active_regimen": medications,
+        "banner_warning": "This view cannot be reopened. Session will permanently expire once closed or submitted."
+    }
+
+    # Cryptographic HMAC-SHA256 signature using forward-secret ephemeral session key
+    signature_meta = ephemeral_gateway.sign_session_payload(
         session_id=record["session_id"],
-        patient_name=patient["name"],
-        patient_age=patient["age"],
-        dob=patient["dob"],
-        mrn=patient["mrn"],
-        expires_in_seconds=300,
-        scopes_granted=granted_list,
-        allergies=allergies,
-        diagnoses=diagnoses,
-        biometrics=biometrics,
-        active_regimen=medications
+        payload_data=payload_dict
+    )
+
+    return DoctorSessionData(
+        **payload_dict,
+        signature_metadata=signature_meta
     )
 
 @app.post("/api/doctor/prescribe", response_model=SafetyReportResponse)
 def prescribe_and_screen(req: PrescribeNewMedicationRequest):
     patient = load_patient_data()
+    
+    # 1. NLM RxNav / openFDA Entity Resolution & LASA Screening
+    norm_result = None
+    resolved_drug_name = req.medication_name
+    try:
+        norm_result = rxnorm_normalizer.normalize(req.medication_name)
+        if norm_result and norm_result.get("generic_name"):
+            resolved_drug_name = norm_result["generic_name"]
+    except HTTPException as e:
+        # Re-raise strict 422 if similarity is below cutoff 0.70
+        raise e
+    except Exception as e:
+        # Fallback to provided medication name on network error
+        pass
+
     report = safety_engine.evaluate_prescription(
-        new_drug_name=req.medication_name,
+        new_drug_name=resolved_drug_name,
         dosage=req.dosage,
         frequency=req.frequency,
         duration=req.duration,
         patient_data=patient,
         session_id=req.session_id
     )
+
+    # 2. Append FDA / ISMP LASA Alert if phonetic risk detected
+    if norm_result and norm_result.get("lasa_warning"):
+        lasa_finding = ClinicalFinding(
+            id="fnd-lasa-01",
+            severity="AMBER_REVIEW",
+            severity_label="[AMBER REVIEW] Look-Alike Sound-Alike (LASA) Hazard",
+            category="LASA Phonetic Conflict",
+            class_level="FDA / ISMP TALL MAN SAFETY",
+            headline=f"Tall Man Phonetic Conflict: {req.medication_name}",
+            title=f"Phonetic Disambiguation: {req.medication_name} vs {resolved_drug_name}",
+            description=norm_result["lasa_warning"],
+            evidence_source="FDA / ISMP List of Error-Prone Drug Names & Tall Man Lettering",
+            clinical_uncertainty="Phonetic edit-distance collision detected in pharmaceutical ontology",
+            graph_path=[f"{req.medication_name} --[phonetic_lasa_collision]--> {resolved_drug_name}"]
+        )
+        report.findings.insert(0, lasa_finding)
+        report.summary_counts["amber_review"] = report.summary_counts.get("amber_review", 0) + 1
     
     # Audit log prescription safety execution
     audit_logger.log_event(
         actor="Dr. Elena Vance, MD",
-        event=f"Algorithmic Safety Evaluation Ran: {req.medication_name} {req.dosage}",
+        event=f"Algorithmic Safety Evaluation Ran: {resolved_drug_name} ({req.medication_name}) {req.dosage}",
         code=req.session_id,
-        scopes=["Interactions", "Duplicates", "Allergies", "Disease-Conflict"],
+        scopes=["Interactions", "Duplicates", "Allergies", "Disease-Conflict", "RxNorm-LASA"],
         status="Report Formulated"
     )
     
@@ -239,6 +295,58 @@ def prescribe_and_screen(req: PrescribeNewMedicationRequest):
 @app.get("/api/audit/logs")
 def get_audit_logs():
     return audit_logger.get_logs()
+
+@app.get("/api/audit/verify")
+def verify_audit_ledger():
+    """
+    Cryptographic audit trail integrity verification (HIPAA 45 CFR § 164.312(c)(1)).
+    Traverses the rolling SHA-256 hash chain and confirms no tampering, deletion,
+    or unauthorized insertion of records has occurred.
+    """
+    return audit_logger.verify_ledger_integrity()
+
+@app.post("/api/session/verify-signature")
+def verify_session_signature(req: Dict[str, Any]):
+    """
+    Verify the HMAC-SHA256 signature of a consultation session ledger payload
+    using constant-time comparison to prevent tampering and timing attacks.
+    """
+    session_id = req.get("session_id", "")
+    payload_data = req.get("payload", {})
+    signature = req.get("signature", "")
+    if not session_id or not signature:
+        raise HTTPException(status_code=400, detail="session_id and signature are required")
+
+    valid = ephemeral_gateway.verify_session_payload_signature(session_id, payload_data, signature)
+    return {
+        "session_id": session_id,
+        "is_valid": valid,
+        "signature_status": "Valid - Tamper-free payload" if valid else "INVALID - Payload signature mismatch"
+    }
+
+@app.post("/api/reaper/sweep")
+def trigger_reaper_sweep():
+    """
+    Manually trigger consultation session reaper sweep.
+    Terminates consultations exceeding the 300-second TTL and purges memory buffers.
+    """
+    purged = session_reaper.reap_now()
+    return {
+        "status": "sweep_completed",
+        "terminated_sessions": purged,
+        "total_reaped_lifetime": session_reaper.total_reaped
+    }
+
+@app.get("/api/reaper/status")
+def get_reaper_status():
+    """
+    Telemetry for background consultation session reaper daemon.
+    """
+    return {
+        "is_running": session_reaper.is_running,
+        "interval_seconds": session_reaper.interval,
+        "total_reaped": session_reaper.total_reaped
+    }
 
 # --- STATIC FILES & SPA SERVING ---
 

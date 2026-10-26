@@ -355,5 +355,43 @@ class TestPharmacoinformaticsSuite(unittest.TestCase):
         self.assertIn("literature_citations", edge["data"])
 
 
+    def test_41_prescribe_endpoint_resolves_brand_and_flags_lasa(self):
+        """Prescribing 'Celebrex' resolves to Celecoxib and appends LASA warning finding."""
+        payload = {
+            "session_id": "SES-98214",
+            "patient_id": "GK-8821",
+            "medication_name": "Celebrex",
+            "dosage": "100 mg",
+            "frequency": "Once daily",
+            "duration": "14 days",
+            "clinical_rationale": "Acute knee arthralgia"
+        }
+        resp = self.client.post("/api/doctor/prescribe", json=payload)
+        self.assertEqual(resp.status_code, 200)
+        data = resp.json()
+        self.assertGreaterEqual(len(data["findings"]), 4)
+        
+        # Verify LASA finding is present
+        lasa_findings = [f for f in data["findings"] if "LASA" in f["category"] or "Tall Man" in f["headline"]]
+        self.assertGreaterEqual(len(lasa_findings), 1, "Must contain FDA / ISMP Tall Man LASA finding")
+        self.assertIn("CELEbrex", lasa_findings[0]["description"])
+
+    def test_42_prescribe_endpoint_strictly_rejects_fake_drug(self):
+        """Prescribing an unknown fake entity like 'asdfgh123' must return HTTP 422 to prevent hallucination."""
+        payload = {
+            "session_id": "SES-98214",
+            "patient_id": "GK-8821",
+            "medication_name": "asdfgh123",
+            "dosage": "100 mg",
+            "frequency": "Once daily",
+            "duration": "14 days",
+            "clinical_rationale": "Testing hallucination prevention"
+        }
+        resp = self.client.post("/api/doctor/prescribe", json=payload)
+        self.assertEqual(resp.status_code, 422)
+        err = resp.json()
+        self.assertIn("below clinical cutoff", str(err).lower())
+
+
 if __name__ == "__main__":
     unittest.main()

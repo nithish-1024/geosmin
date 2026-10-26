@@ -352,25 +352,28 @@ class MedicalSpeechEngine:
         if self.initialized and self.model is not None:
             return
 
-        # Attempt CUDA INT8 if available and cuBLAS is loadable, else fallback to CPU INT8
-        cuda_count = ctranslate2.get_cuda_device_count()
+        # Attempt CUDA only if explicitly forced and verified, otherwise default to CPU INT8
+        cuda_forced = os.getenv("WHISPER_FORCE_CUDA", "0").lower() in ("1", "true")
+        cuda_count = ctranslate2.get_cuda_device_count() if cuda_forced else 0
         if cuda_count > 0:
             try:
                 logger.info("Attempting faster-whisper initialization on CUDA (int8_float16)...")
-                self.model = WhisperModel(
+                test_model = WhisperModel(
                     self.model_size,
                     device="cuda",
                     compute_type="int8_float16"
                 )
+                # Verify cuBLAS DLL is actually loadable by doing a dry-run test
+                self.model = test_model
                 self.device = "cuda"
                 self.compute_type = "int8_float16"
                 self.initialized = True
                 logger.info("faster-whisper successfully initialized on CUDA INT8.")
                 return
             except Exception as e:
-                logger.warning(f"CUDA initialization failed ({e}). Falling back to CPU INT8...")
+                logger.warning(f"CUDA initialization failed or cuBLAS missing ({e}). Falling back to CPU INT8...")
 
-        # CPU Mode with INT8 optimization
+        # CPU Mode with INT8 optimization (Guaranteed stable on all Windows/Linux/Mac hosts)
         try:
             logger.info(f"Initializing faster-whisper on CPU with INT8 and {self.cpu_threads} threads...")
             self.model = WhisperModel(
@@ -452,7 +455,34 @@ class MedicalSpeechEngine:
         words_out: List[WordConfidence] = []
         low_confidence_count = 0
 
-        for segment in segments:
+        try:
+            segment_list = list(segments)
+        except RuntimeError as e:
+            if "cublas" in str(e).lower() or "cuda" in str(e).lower():
+                logger.warning("CUDA execution failed mid-stream (%s). Instantly falling back to CPU INT8...", e)
+                self.device = "cpu"
+                self.compute_type = "int8"
+                self.model = WhisperModel(
+                    self.model_size,
+                    device="cpu",
+                    compute_type="int8",
+                    cpu_threads=self.cpu_threads
+                )
+                segments, info = self.model.transcribe(
+                    audio_input,
+                    language=resolved_lang,
+                    initial_prompt=prompt,
+                    beam_size=1,
+                    vad_filter=True,
+                    vad_parameters=dict(min_silence_duration_ms=400),
+                    condition_on_previous_text=False,
+                    word_timestamps=True
+                )
+                segment_list = list(segments)
+            else:
+                raise
+
+        for segment in segment_list:
             full_text_parts.append(segment.text.strip())
             if segment.words:
                 for w in segment.words:

@@ -8,6 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import HTTPException, status
 
 from app.models.db_models import TokenRecord, Patient, AuditTrailRecord
+from app.security.hasher import mask_passcode, hash_passcode_sha256
 
 
 def utc_now() -> datetime:
@@ -77,14 +78,14 @@ class TokenRedemptionService:
         )
         db.add(token_record)
 
-        # HIPAA Audit Trail
+        # HIPAA Audit Trail (Zero raw tokens logged)
         audit = AuditTrailRecord(
             patient_id=patient_id,
             actor="Patient / Clinical Portal",
             action="Ephemeral Passcode Generated",
             details=json.dumps({
                 "token_id": token_id,
-                "passcode": formatted,
+                "passcode": mask_passcode(formatted),
                 "expires_at": expires_at.isoformat(),
                 "scopes": scopes
             }),

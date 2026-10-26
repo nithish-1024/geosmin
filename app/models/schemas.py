@@ -99,6 +99,7 @@ class DoctorSessionData(BaseModel):
     biometrics: Optional[BiometricTelemetry] = None
     active_regimen: List[MedicationItem]
     banner_warning: str = "This view cannot be reopened. Session will permanently expire once closed or submitted."
+    signature_metadata: Optional[Dict[str, Any]] = None
 
 # --- Medication Ingestion Models ---
 class AddMedicationRequest(BaseModel):

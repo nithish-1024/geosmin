@@ -1,4 +1,8 @@
 import re
+import hashlib
+import hmac
+import secrets
+from typing import Optional, Tuple
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError, VerificationError, InvalidHashError
 
@@ -84,3 +88,48 @@ class Argon2idSecurityService:
 
 # Singleton instance
 argon2_hasher = Argon2idSecurityService()
+
+
+def hash_passcode_sha256(raw_passcode: str, salt: Optional[str] = None) -> Tuple[str, str]:
+    """
+    Cryptographically hash a 6-digit numeric passcode with random salt using SHA-256.
+    Ensures raw passcodes are never persisted in plaintext.
+    Returns (salt, hash_hex).
+    """
+    clean = raw_passcode.replace("-", "").replace(" ", "").strip()
+    if not clean:
+        raise ValueError("Passcode cannot be empty")
+    if not salt:
+        salt = secrets.token_hex(16)
+    hasher = hashlib.sha256()
+    hasher.update((salt + clean).encode("utf-8"))
+    return salt, hasher.hexdigest()
+
+
+def verify_passcode_sha256(raw_passcode: str, salt: str, expected_hash: str) -> bool:
+    """
+    Verify 6-digit passcode against stored salted hash using constant-time comparison
+    (hmac.compare_digest) to eliminate side-channel timing attack vectors.
+    """
+    if not raw_passcode or not salt or not expected_hash:
+        return False
+    clean = raw_passcode.replace("-", "").replace(" ", "").strip()
+    hasher = hashlib.sha256()
+    hasher.update((salt + clean).encode("utf-8"))
+    calculated_hash = hasher.hexdigest()
+    return hmac.compare_digest(calculated_hash, expected_hash)
+
+
+def mask_passcode(passcode: str) -> str:
+    """
+    HIPAA safe token masking: ensure raw tokens are never written to logs or telemetry.
+    E.g. '842-916' -> '842-***', '842916' -> '842***'.
+    """
+    clean = str(passcode).strip()
+    if len(clean) >= 6:
+        if "-" in clean:
+            parts = clean.split("-", 1)
+            return f"{parts[0]}-***"
+        return f"{clean[:3]}***"
+    return "***"
+

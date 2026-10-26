@@ -60,6 +60,12 @@ class PharmacologicalGraphVisualizer {
     window.addEventListener('resize', this.handleResize);
 
     // Auto-trigger smooth ray-traversal on initial render
+    requestAnimationFrame(() => {
+      if (this.cy) {
+        this.cy.resize();
+        this.cy.fit(undefined, 40);
+      }
+    });
     setTimeout(() => {
       this.runStepByStepTraversal();
     }, 400);
@@ -592,18 +598,23 @@ class PharmacologicalGraphVisualizer {
   }
 
   getLayoutConfig(name) {
-    if (name === 'cola' && cytoscape('core', 'cola')) {
-      return {
-        name: 'cola',
-        animate: true,
-        refresh: 4,
-        maxSimulationTime: 2500,
-        nodeSpacing: 55,
-        edgeLengthVal: 110,
-        randomize: false,
-        fit: true,
-        padding: 40
-      };
+    const hasCola = typeof window.cola !== 'undefined';
+    if (name === 'cola' && hasCola) {
+      try {
+        return {
+          name: 'cola',
+          animate: true,
+          refresh: 4,
+          maxSimulationTime: 2000,
+          nodeSpacing: 55,
+          edgeLengthVal: 110,
+          randomize: false,
+          fit: true,
+          padding: 40
+        };
+      } catch (err) {
+        console.warn("Cola layout config error, falling back to cose:", err);
+      }
     } else if (name === 'breadthfirst') {
       return {
         name: 'breadthfirst',
